@@ -1,0 +1,26 @@
+1.Lambda表达式目标类型必须是“函数式接口”。
+2.Runnable r = () -> {
+			for (int i = 0; i < 100; i++) {
+				System.out.println(Thread.currentThread()+":"+i);
+			}
+		};
+3.Object obj =(Runnable) () -> {
+			for (int i = 0; i < 100; i++) {
+				System.out.println(Thread.currentThread()+":"+i);
+			}
+		};
+4.自定义单方法接口，注意方法形参列表需相同。
+	@Functional Interface
+	interface Test
+	{
+		void run();
+	}
+	
+	Object obj = (Test)()->{
+			……
+	}
+5.方法引用和构造器引用使用“::”。
+	类方法：(a,b,...)->类名.类方法(a,b,...)
+	特殊对象实例方法:(a,b,...)->特殊对象.实例方法(a,b,...)
+	某对象实例方法：(a,b,...)->a.实例方法(b,...)
+	构造器:(a,b,...)->new 类名(a,b,...)
