@@ -1,4 +1,4 @@
-1.Lambda表达式目标类型必须是“函数式接口”。
+1.Lambda表达式目标类型必须是“函数式接口”。【此接口的新使用方法？】
 2.Runnable r = () -> {
 			for (int i = 0; i < 100; i++) {
 				System.out.println(Thread.currentThread()+":"+i);
@@ -20,7 +20,50 @@
 			……
 	}
 5.方法引用和构造器引用使用“::”。
+
 	类方法：(a,b,...)->类名.类方法(a,b,...)
+	class Test {
+		public static void main(String[] args) {
+			// Conver co1 = from ->Integer.valueOf(from);
+			Conver co1 = Integer::valueOf;
+			Integer i = co1.conver("01");
+			System.out.println(i);
+		}
+	}
+	interface Conver {
+		Integer conver(String from);
+	}
+	
 	特殊对象实例方法:(a,b,...)->特殊对象.实例方法(a,b,...)
+		// Conver co2 = from -> "javahelloworld".indexOf(from);
+		Conver co2 = "javahelloworld"::indexOf;
+		Integer i2 = co2.conver("h");
+		System.out.println(i2);
+		
 	某对象实例方法：(a,b,...)->a.实例方法(b,...)
+	public class Test {
+		public static void main(String[] args) {
+			// SubTest st = (a,b,c)->a.substring(b, c);
+			SubTest st = String::substring;
+			String str = st.sub("ItsJavaInHere", 3, 7);
+			System.out.println(str);
+		}
+	}
+	interface SubTest {
+		String sub(String a, int b, int c);
+	}
+
 	构造器:(a,b,...)->new 类名(a,b,...)
+	public class Test {
+		public static void main(String[] args) {
+			// StruTest st = title -> new JFrame(title);
+			StruTest st = JFrame::new;
+			JFrame jf = st.win("你的电脑");
+			// System.out.println(jf);
+			jf.setVisible(true);
+		}
+	}
+	interface StruTest {
+		JFrame win(String title);
+	}
+
