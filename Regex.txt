@@ -1,4 +1,4 @@
-创建正则表达式
+创建正则表达式:
 	x:任意合法字符
 	\0mnn:八进制
 	\xhh:十六进制
@@ -22,7 +22,7 @@
 	?:子表达式出现零次或一次
 	.:匹配除\n之外任何字符
 	\:用于转义下一字符，或指定八进制、十六进制
-	|:指定两项之中选一项
+	|:指定两项之中选一项，(com|org|cn|net)
 
 预定义字符：
 	.:任何字符
@@ -40,11 +40,41 @@
 	与运算&&:[a-z&&[de]]、[a-z&&[^d-p]，即求交集
 	并运算:[a-d[g-k]]、[a-dg-k]
 
+边界匹配符:
+	^:行的开头
+	$:行的结尾
+	\b:单词的边界
+	\B:非单词的边界
+	\A:输入的开头
+	\G:前一个匹配的结尾
+	\Z:输入的结尾，仅用于最后的结束符
+	\z:输入的结尾
 
-gggggggggg
+数量标识符：
+	贪婪模式：一直匹配。
+		X?:出现零次或一次
+		X*:出现零次或多次
+		X+:出现一次或多次
+		X{n}:出现n次
+		X{n,}:至少n次
+		X{n,m}:至少n次，最多m次
+	勉强模式：最小匹配。(?)
+		X??:出现零次或一次
+		X*?:出现零次或多次
+		X+?:出现一次或多次
+		X{n}?:出现n次
+		X{n,}?:至少n次
+		X{n,m}?:至少n次，最多m次
+	占用模式：(+)
 
-
-
-
-
-
+正则表达式的使用：
+	多次：Pattern->Matcher->boolean
+		Pattern p = Pattern.compile("regex");
+		Matcher m = p.matcher("string");
+			注 if(matcher == null){
+				matcher = p.matcher(string);
+				} else {
+					matcher.reset(string);
+				}
+		boolean f = m.matches();
+	一次：Pattern.matches(regex,string)->boolean
